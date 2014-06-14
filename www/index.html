@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Mobile Datacollection</title>
+       	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.1.min.css">
+        <link rel="stylesheet" href="css/main.css">
+       	<script src="js/jquery-1.10.1.js"></script>
+        <script src="js/main.js"></script>
+        <script src="cordova.js"></script>
+        <script src="js/custom.js"></script>
+       	<script src="cordova_plugins.js"></script>
+    	<script src="js/jquery.mobile-1.4.1.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+    </head>
+    <body onload="onLoad()">
+          <div data-role="page" id="login_page" data-tap-toggle="false"><!-- start of the login page -->
+          
+          <div data-role="header">
+            <h2>Mobile Datacollection</h2>
+            <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+          </div> 
+          
+          <div data-role="content">
+          <form id="loginForm" method="POST">
+          <input type="text" name="username" id="username" placeholder="username" style="height: 3.4em; font-weight:bold;"/>
+          <input type="password" name="password" id="password" placeholder="password" style="height: 3.4em; font-weight:bold;"/>
+          <input type="submit" value="Login" id="loginButton"/>
+          </form>
+          </div>
+          </div><!-- end the login page-->
+      
+          <div data-role="page" id="main_page"><!-- start of the main page-->
+         
+          <div data-role="header">
+           <h2>Mobile Data Collection</h2>
+           <a id="logout"> Logout </a>
+           <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+          </div> 
+            
+          <div data-role="content" id="main_content">
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-shadow="false"  href="#edit_login" data-transition="slide"> Edit Login Profile</a>
+          </fieldset>
+          <fieldset data-role="fieldcontain">
+          <a data-role="button"  data-shadow="false"  href="#questionnaire" data-transition="slide"> Fill Questionnaire Form</a>
+          </fieldset>
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-shadow="false"  href="#queueRecords" data-transition="slide"> Queue</a>
+          </fieldset>
+          </div>
+          </div><!-- end of the main page-->
+     
+         <div data-role="page" id="edit_login"><!-- start of the edit login page-->
+         
+         <div data-role="header">
+         <h2>Mobile Data Collection</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#main_page" data-transition="slide">Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         <div data-role="content">
+                
+         <form id="edit_login_info_form" method="POST">
+         <fieldset data-role="fieldcontain">
+         <input type="text" name="new_username" id="new_username" placeholder="New Username" class="required" minlength="4" style="height: 3.4em; font-weight:bold;"/>
+         </fieldset>
+                  
+         <fieldset data-role="fieldcontain">
+         <input type="password" name="new_password" id="new_password" placeholder="New Password" class="required" minlength="5" style="height: 3.4em; font-weight:bold;"/>
+         </fieldset>
+                  
+         <fieldset data-role="fieldcontain">
+         <input type="password" name="new_password2" id="new_password2" placeholder="Confirm Password" style="height: 3.4em; font-weight:bold;"/>
+         </fieldset>
+                  
+         <fieldset data-role="fieldcontain">
+         <input type="submit" value="Save" id="saveButton"/>
+         </fieldset>
+         </form>
+                  
+         </div>
+         </div><!-- end of the edit login page-->
+     
+         <div data-role="page" id="questionnaire"><!-- start of the questionnaire main page -->
+         
+         <div data-role="header">
+         <h2>Mobile Data Collection</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#main_page" data-transition="slide">Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content" id="main_content2">
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-corners="false" id="identityBtn" href="#location" >Identification</a>
+          </fieldset>
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-corners="false" id="memberBtn" href="#family_member" class="ui-disabled">Household Members</a>
+          </fieldset> 
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-corners="false" id="deathBtn" href="#death"  class="ui-disabled">Death Information</a>
+          </fieldset> 
+          <fieldset data-role="fieldcontain">
+          <a data-role="button" data-corners="false" id="agrBtn" href="#agriculture_livestock" class="ui-disabled">Agriculture and Livestock Information</a>
+          </fieldset>         
+         </div>
+         </div><!-- end of the questionnaire main page -->
+
+         <div data-role="page" id="location"><!-- end of the location page-->
+         
+         <div data-role="header">
+         <h2>Section A: Identification</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#questionnaire">Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <form id="identity_form">
+         <select name="region" id="region" data-native="false">
+            <option value="">Please select region</option>
+            <option value="Arusha">Arusha</option>
+            <option value="DaresSalaam">Dar es Salaam</option>
+            <option value="Dodoma">Dodoma</option>
+            <option value="Iringa">Iringa</option>
+            <option value="Kagera">Kagera</option>
+            <option value="Kilimanjaro">Kilimanjaro</option>
+            <option value="Kigoma">Kigoma</option>
+            <option value="Lindi">Lindi</option>
+            <option value="Manyara">Manyara</option>
+            <option value="Mara">Mara</option>
+            <option value="Mbeya">Mbeya</option>
+            <option value="Morogoro">Morogoro</option>
+            <option value="Mtwara">Mtwara</option>
+            <option value="Mwanza">Mwanza</option>
+            <option value="Pemba North">Pemba North</option>
+            <option value="Pemba South">Pemba South</option>
+            <option value="Pwani">Pwani</option>
+            <option value="Rukwa">Rukwa</option>
+            <option value="Ruvuma">Ruvuma</option>
+            <option value="Singida">Singida</option>
+            <option value="Shinyanga">Shinyanga</option>
+            <option value="Tabora">Tabora</option>
+            <option value="Tanga">Tanga</option>
+            <option value="Zanzibar Central/South">Zanzibar Central/South</option>
+            <option value="Zanzibar North">Zanzibar North</option>
+            <option value="Zanzibar Urban/West">Zanzibar Urban/West</option>
+         </select>
+         <div id="arusha" style="display: none;">
+         <select name="district_Arusha"  data-native="false" >
+            <option value="">Please select district</option>
+            <option value="Monduli">Monduli</option>
+            <option value="Meru">Meru</option>
+            <option value="Arusha City">Arusha City</option>
+            <option value="Karatu">Karatu</option>
+            <option value="Ngorongoro">Ngorongoro</option>
+            <option value="Arusha">Arusha</option>
+            <option value="Longido">Longido</option>
+         </select>
+         </div>
+         <div id="dar" style="display: none;">
+         <select name="district_DaresSalaam"  data-native="false">
+            <option value="">Please select district</option>
+            <option value="Kinondoni Municipal">Kinondoni Municipal</option>
+            <option value="Ilala Municipal">Ilala Municipal</option>
+            <option value="Temeke Municipal">Temeke Municipal</option>
+         </select>
+         </div>
+         <div id="dodoma" style="display: none;">
+         <select name="district_Dodoma"  data-native="false">
+            <option value="">Please select district</option>
+            <option value="Kondoa">Kondoa</option>
+            <option value="Mpwapwa">Mpwapwa</option>
+            <option value="Kongwa">Kongwa</option>
+            <option value="Chamwino">Chamwino</option>
+            <option value="Dodoma Municipal">Dodoma Municipalo</option>
+            <option value="Bahi">Bahi</option>
+            <option value="Chemba">Chemba</option>
+         </select>
+         </div>
+         <div id="kilimanjaro" style="display: none;">
+         <select name="district_Kilimanjaro"  data-native="false">
+            <option value="">Please select district</option>
+            <option value="Rombo">Rombo</option>
+            <option value="Mwanga">Mwanga</option>
+            <option value="Same">Same</option>
+            <option value="Moshi">Moshi</option>
+            <option value="Hai">Hai</option>
+            <option value="Moshi Municipal">Moshi Municipal</option>
+            <option value="Siha">Siha</option>
+         </select>
+         </div>
+         <input type="text" name="ward" id="ward" placeholder="Ward" style="font-weight:bold;"/>
+         <input type="text" name="village" id="village" placeholder="Village or Street" style="font-weight:bold;"/>
+         <input type="text" name="household" id="household" placeholder="Household Name" style="font-weight:bold;"/>
+         <button id="recordLocation">Record Location</button>
+         <input type="text" name="latitude" id="latitude" placeholder="Latitude" style="font-weight:bold;" readonly />
+         <input type="text" name="longitude" id="longitude" placeholder="Longitude" style="font-weight:bold;" readonly/>
+         <input type="text" name="time" id="time" placeholder="Time" style="font-weight:bold;" readonly />
+         <input data-role="button" class="ui-btn-right" type="submit" id="saveIdentity"  value="Save Location"/>
+         </form>
+         </div>
+         
+         </div><!-- end of the location page-->
+         
+         
+         <div data-role="page" id="family_member"><!-- start of the family member page-->
+         
+         <div data-role="header">
+         <h2>Section B: Family Member</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#questionnaire" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <form id="member_form" >
+         <div id="members">
+             <label for="first_name"><b>ASK:</b> First Name</label>
+             <input type="text" name="first_name" id="first_name"/>
+             
+             <label for="middle_name"><b>ASK:</b> Middle Name</label>
+             <input type="text" name="middle_name" id="middle_name"/>
+             
+             <label for="last_name"><b>ASK:</b> Last Name</label>
+             <input type="text" name="last_name" id="last_name"/>
+             
+             <label for="gender"><b>ASK:</b> Gender</label>
+             <select name="gender" id="gender" data-native-menu="false">
+             <option value="male">Male</option>
+             <option value="female">Female</option>
+             </select>
+             
+             <label for="age"><b>ASK:</b> Age</label>
+             <input type="range" name="age" id="age" data-highlight="true" min="0" max="120" data-show-value="true" data-popup-enabled="true" style="display: none;"/>
+             
+             <label for="relationship"><b>ASK:</b> Relationship to head of household:</label>
+             <select name="relationship" id="relationship" data-native-menu="false">
+             <option value="head">Head</option>
+             <option value="spouse">Spouse</option>
+             <option value="son">Son</option>
+             <option value="daughter">Daughter</option>
+             <option value="other">Other Relative</option>
+             <option value="not">Not Related</option>
+             </select>
+             
+             <label for="birthCert"><b>ASK:</b> Does a family member has birth certificate?</label>
+             <select name="birthCert" id="birthCert" data-native-menu="false">
+             <option value="no">No</option>
+             <option value="yes">Yes</option>
+             </select>
+             
+             <label for="check"><b>ASK:</b> Does the family member has disability?</label>
+             <select name="checkDisability" id="checkDisability" data-native-menu="false" onchange="disabilitListener(this.value)">
+             <option value="no">No</option>
+             <option value="yes">Yes</option>
+             </select>
+             <div id="disability" style="display: none;">
+             <fieldset data-role="controlgroup" >
+             <legend>Disability:</legend>
+             <label for="albinism">Albinism</label><input type="checkbox" id="albinism" value="1" name="disability[]"/>
+             <label for="seeing">Seeing</label><input type="checkbox" id="seeing" value="2" name="disability[]"/>
+             <label for="hearing">Hearing</label><input type="checkbox" id="hearing" value="3" name="disability[]"/>
+             <label for="walking">Walking</label><input type="checkbox" id="walking" value="4" name="disability[]"/>
+             <label for="remembering">Remembering</label><input type="checkbox" id="remembering" value="5" name="disability[]"/>
+             <label for="selfcare">Self-Care</label><input type="checkbox" id="selfcare" value="6" name="disability[]"/>
+             <label for="harelip">Hare-Lip</label><input type="checkbox" id="harelip" value="9" name="disability[]"/>
+             <label for="spina">Spina Bifida and Hydrocephalus</label><input type="checkbox" id="spina" value="7"name="disability[]"/>
+             </fieldset>
+             </div>
+             
+             <label for="maritalStatus"><b>ASK:</b> Marital Status</label>
+             <select name="maritalStatus" id="maritalStatus" data-native-menu="false">
+             <option value="never married">Never Married</option>
+             <option value="married">Married</option>
+             <option value="living together">Living together</option>
+             <option value="separated">Separated</option>
+             <option value="widowed">Widowed</option>
+             <option value="not stated">Not Stated</option>
+             </select>  
+                    
+             <label for="country"><b>ASK:</b> Citizenship</label>
+             <select name="country" id="country" data-native="false">
+             <option value="">Please select country</option>
+             <option value="Afghanistan">Afghanistan</option>
+             <option value="Algeria">Algeria</option>
+             <option value="Angola">Angola</option>
+             <option value="Australia">Australia</option>
+             <option value="Bangaladesh">Bangaladesh</option>
+             <option value="Benin">Benin</option>
+             <option value="Botswana">Botswana</option>
+             <option value="Burkina Faso">Burkina Faso</option>
+             <option value="Burundi">Burundi</option>
+             <option value="Cote d'Ivoire">Cote d'Ivoire</option>
+             <option value="Cameroon">Cameroon</option>
+             <option value="Canada">Canada</option>
+             <option value="Central Africa">Central Africa</option>
+             <option value="China">China</option>
+             <option value="Comoros">Comoros</option>
+             <option value="Congo">Congo</option>
+             <option value="Democratic Republic of Congo">Democratic Republic of Congo</option>
+             <option value="Djibouti">Djibouti</option>
+             <option value="Egypt">Egypt</option>
+             <option value="Ethiopia">Ethiopia</option>
+             <option value="France">France</option>
+             <option value="Ghana">Ghana</option>
+             <option value="Guinea">Guinea</option>
+             <option value="Hong Kong">Hong Kong</option>
+             <option value="India">India</option>
+             <option value="Iraq">Iraq</option>
+             <option value="Japan">Japan</option>
+             <option value="Kenya">Kenya</option>
+             <option value="Kuwait">Kuwait</option>
+             <option value="Libya">Libya</option>
+             <option value="Malawi">Malawi</option>
+             <option value="Mozambique">Mozambique</option>
+             <option value="Namibia">Namibia</option>
+             <option value="Niger">Niger</option>
+             <option value="Nigeria">Nigeria</option>
+             <option value="North Korea">North Korea</option>
+             <option value="Norway">Norway</option>
+             <option value="Oman">Oman</option>
+             <option value="Pakistan">Pakistan</option>
+             <option value="Poland">Poland</option>
+             <option value="Qatar">Qatar</option>
+             <option value="Rwanda">Rwanda</option>
+             <option value="Saudi Arabia">Saudi Arabia</option>
+             <option value="Seychelles">Seychelles</option>
+             <option value="Somalia">Somalia</option>
+             <option value="South Africa">South Africa</option>
+             <option value="Sudan">Sudan</option>
+             <option value="Tanzania">Tanzania</option>
+             <option value="Tunisia">Tunisia</option>
+             <option value="Turkey">Turkey</option>
+             <option value="Uganda">Uganda</option>
+             <option value="United Kingdom">United Kingdom</option>
+             <option value="United States">United States</option>
+             <option value="Yemen">Yemen</option>
+             <option value="Zambia">Zambia</option>
+             <option value="Zimbabwe">Zimbabwe</option>
+             </select>
+             
+             <label for="residence"><b>ASK:</b> Where respondents spend the whole day?</label>
+             <select name="residence" id="residence" data-native-menu="false">
+             <option value="living rural">Living Rural</option>
+             <option value="regional/district Headquarter">Regional/District Headquarter</option>
+             <option value="other urban">Other Urban</option>
+             </select>
+
+             <label for="check"><b>ASK:</b> Does this family has family member who is a member of social security fund?</label>
+             <select name="checkFund" id="checkFund" data-native-menu="false">
+             <option value="no">No</option>
+             <option value="yes">Yes</option>
+             </select> 
+                     
+             <div id="socialFund" style="display: none;">
+             <fieldset data-role="controlgroup" >
+             <legend>Social security fund organisation:</legend>
+             <label for="nssf">NSSF</label><input type="checkbox" id="nssf" value="21" name="ssf[]"/>
+             <label for="zssf">ZSSF</label><input type="checkbox" id="zssf" value="22" name="ssf[]"/>
+             <label for="ppf">PPF</label><input type="checkbox" id="ppf" value="23" name="ssf[]"/>
+             <label for="pspf">PSPF</label><input type="checkbox" id="pspf" value="24" name="ssf[]"/> 
+             <label for="gepf">GEPF</label><input type="checkbox" id="gepf" value="25" name="ssf[]"/>
+             <label for="lapf">LAPF</label><input type="checkbox" id="lapf" value="26" name="ssf[]"/>
+             <label for="nhif">NHIF</label><input type="checkbox" id="nhif" value="27" name="ssf[]"/>
+             <label for="other">OTHER SOCIAL FUND</label><input type="checkbox" value="28" id="other" name="ssf[]"/>
+             </fieldset>
+             </div>
+                   
+             <label for="literacy"><b>ASK:</b> In which language does a family member know how to read and write?</label>
+             <select name="literacy" id="literacy" data-native-menu="false">
+             <option value="10">Kiswahili</option>
+             <option value="11">English</option>
+             <option value="12">Kiswahili and English</option>
+             <option value="14">Other Language</option>
+             <option value="13">Dont know</option>
+             </select>
+             
+             <div id="level_of_education">
+             <label for="education_level"><b>ASK:</b> What is the current education level of the family member?</label>
+             <select name="education_level" id="education_level" data-native-menu="false">
+             <option value="15">Primary</option>
+             <option value="16">Secondary</option>
+             <option value="17">Higher(A)level Secondary </option>
+             <option value="18">Tertiary</option>
+             </select>
+             </div>
+             
+         </div>
+         <input type="submit" value="Save Family Member" id="saveMember"/>
+         </form>   
+         </div>
+         
+         </div><!-- end of the family member page-->
+         
+         <div data-role="page" id="death"><!-- start of the death information page-->
+         
+         <div data-role="header">
+         <h2>Section C: Death and Marternal death</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#questionnaire" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <form id="death_form">
+         <label for="check"><b>ASK:</b> Was there any death occured in last 12 months?</label>
+         <select name="checkDeath" id="checkDeath" data-native-menu="false">
+         <option value="no">No</option>
+         <option value="yes">Yes</option>
+         </select>
+         
+         <div id="deathInfo" style="display: none;">
+         <label for="deceased_Gender"><b>ASK:</b> What was deceased gender?</label>
+         <select name="deceased_Gender" id="deceased_Gender" data-native-menu="false">
+         <option value="male">Male</option>
+         <option value="female">Female</option>
+         </select>
+         <label for="deceased_Age"><b>ASK:</b> How old was the deceased:</label>
+         <input type="range" name="deceased_Age" id="deceased_Age" data-highlight="true" min="0" max="120" data-show-value="true" data-popup-enabled="true" style="display: none;"/>
+         <label for="cause_of_death"><b>ASK:</b> What was the cause of death?</label>
+         <select name="cause_of_death" id="cause_of_death" data-native-menu="false">
+         <option value=""></option>
+         <option value="road accident">Road Accident</option>
+         <option value="other injuries">Other Injuries</option>
+         <option value="suicide">Suicide</option>
+         <option value="violence">Violence</option>
+         <option value="sickness">Sickness</option>
+         <option value="due to pregnancy/childbirth">Due to pregnancy/Childbirth</option>
+         </select>
+         <input type="submit" value="Save Death Information" id="saveDeath"/>
+         </form>
+         </div>
+         </div>
+         
+         </div><!-- end of the death of information page-->
+         
+         <div data-role="page" id="agriculture_livestock"><!-- start of the angriculture and livestock page-->
+         
+         <div data-role="header">
+         <h2>Section D: Agriculter and Livestock</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#questionnaire" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <form id="agriculture_form">
+         <label for="check"><b>ASK:</b> Does this family involved in agriculture?</label>
+         <select name="checkAgr" id="checkAgr" data-native-menu="false">
+         <option value="no">No</option>
+         <option value="yes">Yes</option>
+         </select>
+         
+         <div id="agriculture" style="display: none;">
+         <fieldset data-role="controlgroup" >
+         <legend>Crops planted:</legend>
+         <label for="mahindi">Mahindi</label><input type="checkbox" id="mahindi" value="31" name="crop[]"/>
+         <label for="mpunga">Mpunga</label><input type="checkbox" id="mpunga" value="30" name="crop[]"/>
+         <label for="mhogo">Mhogo</label><input type="checkbox" id="mhogo" value="29" name="crop[]"/>
+         <label for="ndizi">Ndizi</label><input type="checkbox" id="ndizi" value="32" name="crop[]"/>
+         <label for="other">Other crops</label><input type="checkbox" id="other" value="33" name="crop[]"/> 
+         </fieldset>
+         </div> 
+         
+         <label for="check"><b>ASK:</b> Does this family keep any livestock?</label>
+         <select name="checkLivestk" id="checkLivestk" data-native-menu="false">
+         <option value="no">No</option>
+         <option value="yes">Yes</option>
+         </select>
+                  
+         <div id="livestock" style="display: none;">
+         <fieldset data-role="controlgroup" >
+         <legend>Livestock:</legend>
+         <label for="cow">Cow</label><input type="checkbox" id="cow" value="34" name="livestock[]"/>
+         <label for="goat">Goat</label><input type="checkbox" id="goat" value="35" name="livestock[]"/>
+         <label for="sheep">Sheep</label><input type="checkbox" id="sheep" value="36" name="livestock[]"/>
+         <label for="chicken">Chicken</label><input type="checkbox" id="chicken" value="37" name="livestock[]"/> 
+         <label for="other">Other livestock</label><input type="checkbox" id="other" value="39" name="livestock[]"/>
+         </fieldset>
+         </div>
+          <input type="submit" value="Save" id="saveAgr"/>
+         </form>
+         </div>      
+              
+         </div><!-- end of the angriculture and livestock page-->
+
+         <div data-role="page" id="queueRecords"><!-- start of the queue page-->
+         
+         <div data-role="header">
+         <h2>Queue</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#main_page" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <fieldset data-role="fieldcontain">
+         <a data-role="button" id="viewLocations" href="#queue_listRecord" >Records in Queue</a>
+         </fieldset>
+         </div>
+         </div><!-- end of the queue page-->     
+   
+         <div data-role="page" id="queue_listRecord">
+         
+         <div data-role="header">
+         <h2>Saved Records</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#queueRecords" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content" >
+         <ul data-role="listview" id="savedLocation"></ul>
+         
+         </div>
+         </div> 
+         
+         <div data-role="page" id="queue_viewRecord">
+         
+         <div data-role="header">
+         <h2>Saved Records</h2>
+         <a  data-role="button" data-icon="back" data-iconpos="notext" class="ui-btn-left" href="#queue_listRecord" >Back</a>
+         <a data-icon="alert" data-iconpos="notext" class="ui-btn-right network_alert" style="cursor:default; display: none; background: bisque;">Alert</a>
+         </div>
+         
+         <div data-role="content">
+         <form id="savedRecordForm">
+             <ul data-role="listview" class="appendLocation"></ul>
+             <ul data-role="listview" class="appendMembers"></ul>
+             <ul data-role="listview" class="appendDeath"></ul>
+             <ul data-role="listview" class="appendAgr"></ul>
+             <input type="submit" id="submitBtn" data-role="button" value="Save"/>
+         </form>
+         </div>
+         </div>
+          
+     
+    </body>
+    
+</html>
+<script>
+ function onLoad(){
+    document.addEventListener("backbutton", onBackKeyDown, false);
+    document.addEventListener("deviceready", onDeviceReady, false);
+ }
+         
+/*Script for validating user while login into the application*/        
+      $("#loginButton").on("tap",function(event){ 
+      event.preventDefault();
+      loginAuthentication();
+      }); 
+      
+ /*Script for validating user input while changing login credentials*/ 
+        $('#edit_login_info_form').validate({
+       rules: {
+        new_username: {
+            required: true,
+            minlength: 4
+        },
+        new_password: {
+            required: true,
+            minlength: 5
+        },
+        new_password2: {
+            equalTo: "#new_password"
+        }
+        }, // end validation rules
+         errorPlacement: function (error, element){
+         error.insertAfter(element.parent());
+        },
+        submitHandler: function(){
+        updateLogin(); /*submit the form only if its valid */ 
+        return false;
+        }
+         });
+
+ /*Script for validating user input while filling the identification form*/ 
+        $('#identity_form').validate({
+       rules: {
+        region: {
+            required: true
+        },
+        district: {
+            required: true
+        },
+        ward: {
+            required: true
+        },
+        village:{
+            required:true
+        },
+        household:{
+            required:true
+        }                       
+        }, // end validation rules
+        messages: {
+        region: {
+            required: "Please choose region"
+        },
+        district: {
+            required: "Please choose district"
+        },
+        ward: {
+            required: "Please enter ward name"
+        },
+        village:{
+            required: "Please enter village name"
+        },
+        household:{
+            required: "Please enter household name"
+        }            
+        },
+         errorPlacement: function (error, element){
+         error.insertAfter(element.parent());
+        },
+        submitHandler: function(){
+        saveIdentity(); /*submit the form only if its valid */ 
+        return false;
+        }
+         });
+         
+         
+  /*Script for validating user input while filling the family member form*/ 
+        $('#member_form').validate({
+       rules: {
+        first_name: {
+            required: true
+        },
+        middle_name: {
+            required: true
+        },
+        last_name: {
+            required: true
+        },
+        age:{
+            required:true,
+            range:[10,120]
+        }, 
+        country: {
+            required: true
+        }                      
+        }, // end validation rules
+        messages: {
+        first_name: {
+            required: "Please enter first name"
+        },
+        middle_name: {
+            required: "Please enter middle name"
+        },
+        last_name: {
+            required: "Please enter last name"
+        },
+        age:{
+            required: "Please enter age"
+        },
+        country:{
+            required: "Please choose a country"
+        }            
+        },
+         errorPlacement: function (error, element){
+         error.insertAfter(element.parent());
+        },
+        submitHandler: function(){
+        saveMember(); /*submit the form only if its valid */ 
+        return false;
+        }
+         });
+              
+ /*Script for validating user input while filling the death form*/ 
+        $('#death_form').validate({
+       rules: {
+        deceased_Age: {
+            required: true,
+            range:[0,120]
+        },
+        cause_of_death: {
+            required: true
+        }                        
+        }, // end validation rules
+        messages:{
+            deceased_Age: {
+            required: "Please enter the age"
+            },
+            cause_of_death: {
+            required: "Please choose the reason of death"
+            }
+        },
+         errorPlacement: function (error, element){
+         error.insertAfter(element.parent());
+        },
+        submitHandler: function(){
+        saveDeath(); /*submit the form only if its valid */ 
+        return false;
+        }
+         });
+           
+/*Script for recording the location  */   
+    $("#recordLocation").on('tap' ,function(event){
+       event.preventDefault();
+       var time = new Date();
+       var timestamp = time.toDateString()+ ' '+time.getHours()+':'+time.getMinutes();
+       $("#time").val(timestamp);
+       getLocation();
+    });   
+
+/*Script for hiding and displaying the Disiability view*/   
+function disabilitListener(selected){ 
+    //$("#checkDisability").change(function(){
+        //var selectedVal = $("#checkDisability option:selected").val(); 
+        var selectedVal = selected; 
+        $("#disability").hide();
+        if(selectedVal == 'yes'){
+          $("#disability").show();  
+        }else if(selectedVal == 'no'){
+            $("#disability").hide();
+        }
+   // });
+    }
+
+/*Script for hiding and displaying the death info view*/
+    $("#checkDeath").change(function(){
+        var selectedVal = $("#checkDeath").val();
+        $("#deathInfo").hide();
+        if( selectedVal == 'yes'){
+         $("#deathInfo").show();   
+        }
+    });
+/*Script for hiding and displaying the agriculture info view*/    
+    $("#checkAgr").change(function(){
+        var selectedVal = $("#checkAgr").val();
+        $("#agriculture").hide();
+        if( selectedVal == 'yes'){
+         $("#agriculture").show();   
+        }
+    });
+/*Script for hiding and displaying the livestock info view*/    
+    $("#checkLivestk").change(function(){
+        var selectedVal = $("#checkLivestk").val();
+        $("#livestock").hide();
+        if( selectedVal == 'yes'){
+         $("#livestock").show();   
+        }
+    });    
+/*Script for hiding and displaying the social security fund info view*/    
+    $("#checkFund").change(function(){
+        var selectedVal = $("#checkFund").val();
+        $("#socialFund").hide();
+        if( selectedVal == 'yes'){
+         $("#socialFund").show();   
+        }
+    }); 
+
+/*Script for hiding and displaying the education level info view*/    
+    $("#literacy").change(function(){
+        var selectedVal = $("#literacy").val();
+        $("#level_of_education").show();
+        if( selectedVal == 13){
+         $("#level_of_education").hide();   
+        }
+    });   
+ 
+/*Script for hiding and displaying the distirct*/    
+    $("#region").change(function(){
+        var selectedVal = $("#region").val();
+        $("#arusha").hide();
+        $("#dar").hide();
+        $("#dodoma").hide();
+        $("#kilimanjaro").hide();
+        if( selectedVal == 'Arusha'){
+         $("#arusha").show();   
+        }
+        if( selectedVal == 'DaresSalaam'){
+            $("#dar").show();
+            }
+        if( selectedVal == 'Dodoma'){
+          $("#dodoma").show();  
+            }
+        if( selectedVal == 'Kilimanjaro'){
+            $("#kilimanjaro").show();
+            }
+    });
+    
+
+/*Script for posting Agriculture and livestock data to the server*/
+  $("#saveAgr").on("tap",function(event){ 
+      event.preventDefault();
+      saveAgr();
+    });
+
+ $("#deathBtn").on("tap",function(){
+    $("#agrBtn").removeClass('ui-disabled');
+ });
+      
+ $("#logout").on("tap",function(){
+    event.preventDefault();
+    logout();
+ });
+ 
+  $("#viewLocations").on("tap",function(){
+   viewIdentity();
+ });
+ 
+ $(document).on("tap",".viewMore",function(){
+    var index = this.parentNode.id;
+    getRecords(index);
+ });
+ 
+ $("#submitBtn").on("tap",function(){
+    saveLocalData();
+ });
+</script>

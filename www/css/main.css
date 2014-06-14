@@ -1,0 +1,66 @@
+
+#loginForm{
+    width: 80%;
+    height: 50%;    
+    margin: 16% auto 0;
+    padding: 1em;
+    border-radius: 5px;
+    -webkit-border-radius: 12px;
+}
+
+
+#main_content{
+    padding: 2em;
+}
+
+#main_content a{
+  font-size: 1.4em;
+}
+
+#main_content2 a{
+  font-size: 1.27em;
+}
+
+#edit_login_info_form label.error{
+  color: red;
+  display: block;
+  font-weight: bold;
+  width: 65%
+}
+
+#identity_form label.error{
+  color: red;
+  display: block;
+  font-weight: bold;
+  width: 65%
+}
+
+#family_form label.error{
+  color: red;
+  display: block;
+  font-weight: bold;
+  width: 65%
+}
+
+#death_form label.error{
+  color: red;
+  display: block;
+  font-weight: bold;
+  width: 65%
+}
+
+#member_form label.error{
+  color: red;
+  display: block;
+  font-weight: bold;
+  width: 65%
+}
+
+h2 .network_alert{
+    
+    background: bisque;
+}
+
+.slider input{
+    display: none;
+}
